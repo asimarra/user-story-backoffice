@@ -1,0 +1,49 @@
+<div id="div-invoice">
+    <div class="field">
+        <label for="productSelect">Select Products</label>
+        <p-dropdown
+          [options]="productOptions"
+          optionLabel="label"
+          placeholder="Select a product"
+          (onChange)="addProduct($event.value)"
+          [filter]="true"
+          filterPlaceholder="Search product"
+        ></p-dropdown>
+      </div>
+      <p-table [value]="selectedProducts">
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width:20%">Product</th>
+            <th style="width:20%">Price</th>
+            <th style="width:20%">Stock</th>
+            <th style="width:10%">Quantity</th>
+            <th style="width:20%">Total</th>
+            <th style="width:10%">Action</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-i="rowIndex">
+          <tr>
+            <td>{{ product.label }}</td>
+            <td>{{ product.price | currency }}</td>
+            <td>{{ product.stock  }}</td>
+            <td>
+              <p-inputNumber
+                [step]="1"
+                [min]="1"
+                [max]="product.stock"
+                [(ngModel)]="selectedProducts[i].quantity"
+                (onInput)="calculateTotal()"
+                [ngModelOptions]="{ standalone: true }"
+
+              ></p-inputNumber>
+            </td>
+            <td>{{ product.price * product.quantity | currency }}</td>
+            <td>
+              <p-button icon="pi pi-trash" class="p-button-danger " (onClick)="removeProduct(i)"></p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <h3 *ngIf="selectedProducts.length">Total: {{ totalAmount | currency }}</h3>
+      <p-button label="Generate Invoice" styleClass="w-full mt-2" [disabled]="selectedProducts.length === 0" (onClick)="submitInvoice()"></p-button>
+</div>
