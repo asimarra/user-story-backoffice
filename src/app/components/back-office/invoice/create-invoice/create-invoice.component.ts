@@ -8,7 +8,7 @@ import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'app-create-invoice',
   templateUrl: './create-invoice.component.html',
-  styleUrls: ['./create-invoice.component.css']
+  styleUrls: ['./create-invoice.component.css'],
 })
 export class CreateInvoiceComponent implements OnInit {
   private fb = inject(FormBuilder);
@@ -43,7 +43,11 @@ export class CreateInvoiceComponent implements OnInit {
         this.calculateTotal();
       }
     } else {
-      this.messageService.add({ severity: 'error', summary: 'Out of Stock', detail: `The product ${product.name} is currently out of stock. Please select a different product.` });
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Out of Stock',
+        detail: `The product ${product.name} is currently out of stock. Please select a different product.`,
+      });
     }
   }
 
@@ -53,14 +57,19 @@ export class CreateInvoiceComponent implements OnInit {
   }
 
   calculateTotal() {
-    this.totalAmount = this.selectedProducts.reduce((acc, p) => acc + p.price * p.quantity, 0);
+    this.totalAmount = this.selectedProducts.reduce((acc, p) => {
+      const quantity = Math.min(p.quantity, p.stock);
+      return acc + p.price * quantity;
+    }, 0);
   }
 
   submitInvoice() {
-    const invoiceData = this.selectedProducts.map((p) => ({ productId: p.value, quantity: p.quantity }));
+    const invoiceData = this.selectedProducts.map((p) => ({
+      productId: p.value,
+      quantity: p.quantity,
+    }));
     this.invoiceService.createInvoice(invoiceData).subscribe(
       (response) => {
-        console.log({response});
         this.messageService.add({
           severity: 'success',
           summary: 'Invoice Created',
@@ -69,7 +78,11 @@ export class CreateInvoiceComponent implements OnInit {
         this.router.navigate(['dashboard']);
       },
       () => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong' });
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Something went wrong',
+        });
       }
     );
   }
