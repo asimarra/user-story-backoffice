@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <a id="logo" class="logo" routerLink="/dashboard">BackOffice</a>
+  <nav>
+    <ul>
+      <li *ngFor="let item of menuItems">
+        <a [routerLink]="item.link">{{ item.label }}</a>
+      </li>
+    </ul>
+  </nav>
+  <span class="separator"></span>
+
+  <p-button label="Sign out" (onClick)="logOut()"></p-button>
+</div>

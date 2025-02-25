@@ -34,7 +34,7 @@ export class LoginComponent {
     this.authService.login(email as string, password as string).subscribe(
       (response) => {
         if (response.token) {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/dashboard']);
         } else {
           this.msgService.add({
             severity: 'error',
