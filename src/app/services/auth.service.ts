@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { SingUpUser } from '../interfaces/auth';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '../interfaces/user';
+import { environment } from '../config/environments';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private authUrl = 'http://localhost:3000/api/auth';
+  private authUrl = `${environment.API_BASE_URL}/auth`;
   private tokenSubject = new BehaviorSubject<string | null>(null);
   token$ = this.tokenSubject.asObservable();
 
