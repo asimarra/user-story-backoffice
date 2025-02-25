@@ -22,7 +22,6 @@ export class HeaderComponent {
           link: `/${permission.resource.toLowerCase()}`,
         };
       });
-      console.log(this.menuItems);
     }
   }
 
