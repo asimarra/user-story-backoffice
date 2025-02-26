@@ -9,28 +9,30 @@ import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
 
 import { InvoiceComponent } from './invoice.component';
 import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
 
 const routes = [
   { path: '', component: InvoiceComponent },
-  { path: 'create', component: CreateInvoiceComponent }
+  { path: 'create', component: CreateInvoiceComponent },
 ];
 
 @NgModule({
   declarations: [InvoiceComponent, CreateInvoiceComponent],
   imports: [
-    CommonModule, 
-    RouterModule.forChild(routes), 
-    ReactiveFormsModule, 
+    CommonModule,
+    RouterModule.forChild(routes),
+    ReactiveFormsModule,
     FormsModule,
-    CardModule, 
-    MultiSelectModule, 
-    ButtonModule, 
+    CardModule,
+    MultiSelectModule,
+    ButtonModule,
     InputNumberModule,
     DropdownModule,
-    TableModule
+    TableModule,
+    DialogModule,
   ],
 })
-export class InvoiceModule { }
+export class InvoiceModule {}
