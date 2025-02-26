@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Invoice } from '../interfaces/invoice';
+import { Invoice, InvoiceDetail } from '../interfaces/invoice';
 import { Observable } from 'rxjs';
 import { environment } from '../config/environments';
 
@@ -11,7 +11,13 @@ export class InvoiceService {
   private http = inject(HttpClient);
   private invoiceUrl = `${environment.API_BASE_URL}/invoices`;
 
-  createInvoice(invoiceData: Invoice[]): Observable<any> {
-    return this.http.post<any>(this.invoiceUrl, { products: invoiceData });
+  createInvoice(invoiceData: Invoice[]): Observable<InvoiceDetail> {
+    return this.http.post<InvoiceDetail>(this.invoiceUrl, {
+      products: invoiceData,
+    });
+  }
+
+  getUserInvoices(userId: string): Observable<InvoiceDetail[]> {
+    return this.http.get<InvoiceDetail[]>(`${this.invoiceUrl}/user/${userId}`);
   }
 }

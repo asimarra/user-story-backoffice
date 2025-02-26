@@ -3,31 +3,33 @@ export interface Invoice {
   quantity: number;
 }
 
-export interface InvoiceResponse {
-  error: boolean;
-  data: {
+export interface InvoiceDetail {
+  id: string;
+  user: {
     id: string;
-    user: {
+    name: string;
+    email: string;
+    password: string;
+    status: string;
+    role: string;
+  };
+  products: {
+    product: {
       id: string;
       name: string;
-      email: string;
-      password: string;
+      description: string;
+      price: number;
+      stock: number;
       status: string;
-      role: string;
     };
-    products: {
-      product: {
-        id: string;
-        name: string;
-        description: string;
-        price: number;
-        stock: number;
-        status: string;
-      };
-      quantity: number;
-    }[];
-    total: number;
-    status: string;
-    createdAt: string;
-  };
+    quantity: number;
+  }[];
+  total: number;
+  status: string;
+  createdAt: string;
+}
+
+export interface InvoiceResponse {
+  error: boolean;
+  data: InvoiceDetail;
 }
