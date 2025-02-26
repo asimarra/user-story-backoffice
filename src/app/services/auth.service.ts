@@ -51,4 +51,8 @@ export class AuthService {
   getToken(): string | null {
     return this.tokenSubject.value;
   }
+
+  getUserRole(): string {
+    return localStorage.getItem('role') || '';
+  }
 }

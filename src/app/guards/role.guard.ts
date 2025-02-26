@@ -1,16 +1,18 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { Action, MenuService } from '../services/menu.service';
+import { AuthService } from '../services/auth.service';
 
 export const RoleGuard: CanActivateFn = (route) => {
   const router = inject(Router);
   const menuService = inject(MenuService);
+  const authService = inject(AuthService);
 
   if (!route.data) {
     return redirectToDashboard(router);
   }
 
-  const userRole = getUserRole();
+  const userRole = authService.getUserRole();
   const { actions: resourceActions = [], resource = '' } = route.data;
   const permissionByRole = menuService.getMenu(userRole);
   const permissionByResource = getPermissionByResource(
@@ -24,10 +26,6 @@ export const RoleGuard: CanActivateFn = (route) => {
 
   return redirectToDashboard(router);
 };
-
-function getUserRole(): string {
-  return localStorage.getItem('role') || '';
-}
 
 function getPermissionByResource(permissionByRole: any[], resource: string) {
   return permissionByRole.find(
