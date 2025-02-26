@@ -22,6 +22,15 @@ const routes: Routes = [
           import('./invoice/invoice.module').then((m) => m.InvoiceModule),
       },
       {
+        path: 'invoices/admin',
+        canActivate: [RoleGuard],
+        data: { resource: 'Invoices', actions: [Action.READ_ADMIN] },
+        loadChildren: () =>
+          import('./invoice-admin/invoice-admin.module').then(
+            (m) => m.InvoiceAdminModule
+          ),
+      },
+      {
         path: 'products',
         canActivate: [RoleGuard],
         data: { resource: 'Products', actions: [Action.READ] },

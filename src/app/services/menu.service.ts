@@ -19,6 +19,7 @@ export enum Action {
 export interface PermissionEntity {
   resource: string;
   actions: Action[];
+  route: string;
   role?: Roles;
 }
 
@@ -26,31 +27,37 @@ const PermissionByRole: PermissionEntity[] = [
   {
     role: Roles.USER,
     resource: 'Users',
+    route: '/users',
     actions: [Action.UPDATE_PROFILE],
   },
   {
     role: Roles.ADMIN,
     resource: 'Users',
+    route: '/users',
     actions: [Action.CREATE, Action.READ, Action.UPDATE, Action.DELETE],
   },
   {
     role: Roles.USER,
     resource: 'Products',
+    route: '/products',
     actions: [Action.READ],
   },
   {
     role: Roles.ADMIN,
     resource: 'Products',
+    route: '/products',
     actions: [Action.CREATE, Action.UPDATE],
   },
   {
     role: Roles.USER,
     resource: 'Invoices',
+    route: '/invoices',
     actions: [Action.CREATE, Action.READ],
   },
   {
     role: Roles.ADMIN,
     resource: 'Invoices',
+    route: '/invoices/admin',
     actions: [Action.READ_ADMIN],
   },
 ];
