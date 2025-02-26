@@ -66,4 +66,5 @@
   </div>
 </p-dialog>
 
-<p *ngIf="!(invoices$ | async)?.length">No invoices found.</p>
+<p *ngIf="!(invoices$ | async)?.length && !loading">No invoices found.</p>
+<p *ngIf="loading">Loading invoices data</p>

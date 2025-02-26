@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {inject, Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
 
 export enum Roles {
   ADMIN = 'ADMIN',
@@ -46,7 +46,7 @@ const PermissionByRole: PermissionEntity[] = [
   {
     role: Roles.USER,
     resource: 'Invoices',
-    actions: [Action.CREATE],
+    actions: [Action.CREATE, Action.READ],
   },
   {
     role: Roles.ADMIN,

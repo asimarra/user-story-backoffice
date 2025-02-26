@@ -12,6 +12,7 @@ import { InvoiceService } from 'src/app/services/invoice.service';
 export class InvoiceComponent implements OnInit {
   private invoiceService = inject(InvoiceService);
   private router = inject(Router);
+  loading = false;
 
   invoices$ = new BehaviorSubject<InvoiceDetail[]>([]);
   userId: string | null = localStorage.getItem('id');
@@ -20,7 +21,9 @@ export class InvoiceComponent implements OnInit {
 
   ngOnInit() {
     if (this.userId) {
+      this.loading = true;
       this.invoiceService.getUserInvoices(this.userId).subscribe((invoices) => {
+        this.loading = false;
         this.invoices$.next(invoices || []);
       });
     }
