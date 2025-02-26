@@ -23,6 +23,7 @@ export class CreateInvoiceComponent implements OnInit {
   productOptions: any[] = [];
   selectedProducts: any[] = [];
   totalAmount: number = 0;
+  loading: boolean = false;
 
   ngOnInit() {
     this.productService.getProducts().subscribe((products) => {
@@ -64,20 +65,23 @@ export class CreateInvoiceComponent implements OnInit {
   }
 
   submitInvoice() {
+    this.loading = true;
     const invoiceData = this.selectedProducts.map((p) => ({
       productId: p.value,
       quantity: p.quantity,
     }));
     this.invoiceService.createInvoice(invoiceData).subscribe(
       (response) => {
+        this.loading = false;
         this.messageService.add({
           severity: 'success',
           summary: 'Invoice Created',
           detail: 'Your invoice has been generated successfully.',
         });
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['invoices']);
       },
       () => {
+        this.loading = false;
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
