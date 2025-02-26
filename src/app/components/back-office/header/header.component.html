@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <a id="logo" class="logo" routerLink="/dashboard">BackOffice</a>
+  <a id="logo" class="logo" routerLink="/dashboard">BackOffice &nbsp;</a>
   <nav>
     <ul>
       <li *ngFor="let item of menuItems">
@@ -9,5 +9,7 @@
   </nav>
   <span class="separator"></span>
 
+  <span class="user-name">{{ name }} - {{ role }}</span>
+  <!-- <p-button label="Profile"></p-button> -->
   <p-button label="Sign out" (onClick)="logOut()"></p-button>
 </div>

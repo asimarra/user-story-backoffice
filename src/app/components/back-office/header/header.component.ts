@@ -13,13 +13,14 @@ export class HeaderComponent {
 
   menuItems: any[] = [];
   role: string | null = localStorage.getItem('role');
+  name: string | null = localStorage.getItem('name');
 
   ngOnInit() {
     if (this.role) {
       this.menuItems = this.menuService.getMenu(this.role).map((permission) => {
         return {
           label: permission.resource,
-          link: `/${permission.resource.toLowerCase()}`,
+          link: `${permission.route.toLowerCase()}`,
         };
       });
     }
