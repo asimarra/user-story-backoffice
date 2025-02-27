@@ -1,27 +1,108 @@
-# User Story BackOffice
+# Frontend - Angular Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
+## 📌 Technologies Used
 
-## Development server
+- **Angular 16.2.0** - Frontend framework
+- **PrimeNG** - UI component library
+- **RxJS** - Reactive programming
+- **TypeScript** - Superset of JavaScript
+- **SCSS / CSS** - Styling
+- **JWT Authentication** - Secure API requests
+- **ChatGPT** - For generate some html, css, interface, and so on.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## 🚀 Setup Instructions
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### **1. Clone the Repository**
 
-## Build
+```bash
+git clone <repository_url>
+cd frontend
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### **2. Install Dependencies**
 
-## Running unit tests
+```bash
+npm install
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### **3. Configure Environment Variables**
 
-## Running end-to-end tests
+Create a `.env` file and specify your API URL if needed:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+API_URL=http://localhost:3000/api
+```
 
-## Further help
+### **4. Run the Application**
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+ng serve
+```
+
+Open [http://localhost:4200](http://localhost:4200) in your browser.
+
+---
+
+## 📖 Usage
+
+### **Authentication**
+
+- Users can register and log in using JWT authentication.
+- Access is restricted based on user roles (USER, ADMIN).
+
+### **Navigation & Features**
+
+#### **Admin Users:**
+
+- Manage Users (CRUD operations)
+- Manage Products (CRUD operations)
+- View all invoices
+- System Overview Dashboard
+
+#### **Regular Users:**
+
+- View products
+- Create invoices (purchases)
+- Track personal purchases via dashboard
+
+### **UI Components**
+
+- **PrimeNG Components** (Tables, Forms, Buttons, Dialogs, Dropdowns)
+- **Responsive Layout** with a top navigation bar
+
+---
+
+## 🛠 Deployment
+
+For production builds:
+
+```bash
+ng build --configuration production
+```
+
+This generates the files in the `/dist` folder, which can be served using Nginx, Apache, or Firebase Hosting.
+
+---
+
+## ❓ Troubleshooting
+
+- If dependencies fail to install, try:
+  ```bash
+  rm -rf node_modules package-lock.json
+  npm install
+  ```
+- If API requests fail, ensure the backend is running at the correct URL.
+
+---
+
+## 🏗 Future Improvements
+
+- Implement update profile feature
+- Implement forgot password
+- Dark mode toggle
+- PWA support
+- Improved UI animations
+
+For any issues, feel free to open a GitHub issue. 🚀
