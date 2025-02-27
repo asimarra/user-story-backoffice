@@ -1,7 +1,11 @@
 <h1>Users List</h1>
 
 <div>
-  <p-table [value]="(users$ | async) ?? []" *ngIf="(users$ | async)?.length">
+  <p-table
+    [style]="{ width: '600px' }"
+    [value]="(users$ | async) ?? []"
+    *ngIf="(users$ | async)?.length"
+  >
     <ng-template pTemplate="header">
       <tr>
         <th>Name</th>

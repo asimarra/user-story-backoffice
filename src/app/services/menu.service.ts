@@ -37,16 +37,16 @@ const PermissionByRole: PermissionEntity[] = [
     actions: [Action.CREATE, Action.UPDATE, Action.READ_ADMIN],
   },
   {
-    role: Roles.USER,
-    resource: 'Invoices',
-    route: '/invoices',
-    actions: [Action.CREATE, Action.READ],
-  },
-  {
     role: Roles.ADMIN,
     resource: 'Invoices',
     route: '/invoices/admin',
     actions: [Action.READ_ADMIN],
+  },
+  {
+    role: Roles.USER,
+    resource: 'Invoices',
+    route: '/invoices',
+    actions: [Action.CREATE, Action.READ],
   },
 ];
 
@@ -54,16 +54,7 @@ const PermissionByRole: PermissionEntity[] = [
   providedIn: 'root',
 })
 export class MenuService {
-  private baseUrl = 'http://localhost:3000/api';
-  private http = inject(HttpClient);
-
   getMenu(role: string) {
     return PermissionByRole.filter((p) => p.role === role);
   }
-
-  /* getMenu(role: string): Observable<PermissionEntity[]> {
-    return this.http.get<PermissionEntity[]>(
-      `${this.baseUrl}/menu?role=${role}`
-    );
-  } */
 }

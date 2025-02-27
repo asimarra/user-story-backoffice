@@ -12,6 +12,6 @@ export class UserService {
   private userUrl = `${environment.API_BASE_URL}/users`;
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.userUrl);
+    return this.http.get<User[]>(this.userUrl + '?offset=0');
   }
 }
