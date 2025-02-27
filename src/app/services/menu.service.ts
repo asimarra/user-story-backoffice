@@ -25,28 +25,16 @@ export interface PermissionEntity {
 
 const PermissionByRole: PermissionEntity[] = [
   {
-    role: Roles.USER,
-    resource: 'Users',
-    route: '/users',
-    actions: [Action.UPDATE_PROFILE],
-  },
-  {
     role: Roles.ADMIN,
     resource: 'Users',
     route: '/users',
     actions: [Action.CREATE, Action.READ, Action.UPDATE, Action.DELETE],
   },
   {
-    role: Roles.USER,
-    resource: 'Products',
-    route: '/products',
-    actions: [Action.READ],
-  },
-  {
     role: Roles.ADMIN,
     resource: 'Products',
     route: '/products',
-    actions: [Action.CREATE, Action.UPDATE, Action.READ],
+    actions: [Action.CREATE, Action.UPDATE, Action.READ_ADMIN],
   },
   {
     role: Roles.USER,
