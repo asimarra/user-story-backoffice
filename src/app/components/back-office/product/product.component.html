@@ -20,6 +20,7 @@
           <th>Price</th>
           <th>Stock</th>
           <th>Status</th>
+          <th>Actions</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-product>
@@ -33,6 +34,14 @@
               [value]="product.status"
               [severity]="getStatusSeverity(product.status)"
             ></p-tag>
+          </td>
+          <td>
+            <p-button
+              [style]="{ fontSize: '12px', padding: '5px 10px' }"
+              icon="pi pi-pencil"
+              severity="success"
+              (onClick)="goToEditProduct(product.id)"
+            ></p-button>
           </td>
         </tr>
       </ng-template>

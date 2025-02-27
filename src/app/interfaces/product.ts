@@ -13,3 +13,15 @@ export interface Product {
   stock: number;
   status: ProductStatus;
 }
+
+export interface UpdateProductResponse {
+  error: boolean;
+  data: string | { productId: string };
+}
+
+export const statusOptionsData = [
+  { label: 'Active', value: 'ACTIVE' },
+  { label: 'Out of Stock', value: 'OUT_OF_STOCK' },
+  { label: 'Discontinued', value: 'DISCONTINUED' },
+  { label: 'Deleted', value: 'DELETED' },
+];

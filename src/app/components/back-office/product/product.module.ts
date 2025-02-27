@@ -16,6 +16,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { RoleGuard } from 'src/app/guards/role.guard';
 import { Action } from 'src/app/services/menu.service';
 import { CreateProductComponent } from './create-product/create-product.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 const routes = [
   { path: '', component: ProductComponent },
@@ -25,10 +26,20 @@ const routes = [
     data: { resource: 'Products', actions: [Action.CREATE] },
     component: CreateProductComponent,
   },
+  {
+    path: 'edit/:id',
+    canActivate: [RoleGuard],
+    data: { resource: 'Products', actions: [Action.UPDATE] },
+    component: EditProductComponent,
+  },
 ];
 
 @NgModule({
-  declarations: [ProductComponent, CreateProductComponent],
+  declarations: [
+    ProductComponent,
+    CreateProductComponent,
+    EditProductComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

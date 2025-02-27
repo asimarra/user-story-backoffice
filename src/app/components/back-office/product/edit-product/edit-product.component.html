@@ -1,0 +1,56 @@
+<h1>Edit Product {{ productId }}</h1>
+
+<div>
+  <form [formGroup]="productForm" (ngSubmit)="submitProduct()">
+    <p-card [style]="{ width: '400px' }">
+      <div class="field">
+        <label for="name">Product Name</label>
+        <input
+          type="text"
+          pInputText
+          formControlName="name"
+          placeholder="Enter product name"
+        />
+      </div>
+      <div class="field">
+        <label for="description">Description</label>
+        <input
+          type="text"
+          pInputText
+          formControlName="description"
+          placeholder="Enter description"
+        />
+      </div>
+      <div class="field">
+        <label for="price">Price</label>
+        <p-inputNumber
+          formControlName="price"
+          [min]="1"
+          placeholder="Enter price"
+        ></p-inputNumber>
+      </div>
+      <div class="field">
+        <label for="stock">Stock</label>
+        <p-inputNumber
+          formControlName="stock"
+          [min]="1"
+          placeholder="Enter stock"
+        ></p-inputNumber>
+      </div>
+      <div class="field">
+        <label for="status">Status</label>
+        <p-dropdown
+          [options]="statusOptions"
+          formControlName="status"
+          placeholder="Select status"
+        ></p-dropdown>
+      </div>
+      <p-button
+        label="Update Product"
+        styleClass="w-full"
+        [disabled]="productForm.invalid"
+        type="submit"
+      ></p-button>
+    </p-card>
+  </form>
+</div>

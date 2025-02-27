@@ -1,25 +1,24 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import {
-  Product,
-  ProductStatus,
-  statusOptionsData,
-} from 'src/app/interfaces/product';
+import { Product, statusOptionsData } from 'src/app/interfaces/product';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
-  selector: 'app-create-product',
-  templateUrl: './create-product.component.html',
-  styleUrls: ['./create-product.component.css'],
+  selector: 'app-edit-product',
+  templateUrl: './edit-product.component.html',
+  styleUrls: ['./edit-product.component.css'],
 })
-export class CreateProductComponent {
+export class EditProductComponent {
   private fb = inject(FormBuilder);
   private productService = inject(ProductService);
   private messageService = inject(MessageService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   statusOptions = statusOptionsData;
+
+  productId: string = '';
 
   productForm = this.fb.group({
     name: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]+$')]],
@@ -27,37 +26,32 @@ export class CreateProductComponent {
       '',
       [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]*$')],
     ],
-    price: [null, [Validators.required, Validators.min(1)]],
-    stock: [null, [Validators.required, Validators.min(1)]],
+    price: [0, [Validators.required, Validators.min(1)]],
+    stock: [0, [Validators.required, Validators.min(1)]],
     status: ['ACTIVE', [Validators.required]],
   });
-  get name() {
-    return this.productForm.controls['name'];
-  }
-  get description() {
-    return this.productForm.controls['description'];
-  }
-  get price() {
-    return this.productForm.controls['price'];
-  }
-  get stock() {
-    return this.productForm.controls['stock'];
-  }
-  get status() {
-    return this.productForm.controls['status'];
+
+  ngOnInit() {
+    this.productId = this.route.snapshot.paramMap.get('id') || '';
+    if (this.productId) {
+      this.productService
+        .getProductById(this.productId)
+        .subscribe((product) => {
+          this.productForm.patchValue(product);
+        });
+    }
   }
 
   submitProduct() {
     if (this.productForm.invalid) return;
-
     this.productService
-      .createProduct(this.productForm.value as Partial<Product>)
+      .updateProduct(this.productId, this.productForm.value as Partial<Product>)
       .subscribe({
         next: () => {
           this.messageService.add({
             severity: 'success',
-            summary: 'Product Created',
-            detail: 'Product has been created successfully.',
+            summary: 'Product Updated',
+            detail: 'Product has been updated successfully.',
           });
           this.router.navigate(['products']);
         },
