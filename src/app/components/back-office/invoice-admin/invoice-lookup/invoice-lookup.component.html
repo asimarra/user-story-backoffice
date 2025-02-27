@@ -1,54 +1,46 @@
-<h1>Invoice Lookup</h1>
+<p-card header="Find Invoice" [style]="{ width: '500px' }">
+  <div class="field" [formGroup]="invoiceForm">
+    <label for="invoice">Select Invoice</label>
+    <p-dropdown
+      [options]="(filteredInvoices$ | async) ?? []"
+      optionLabel="displayName"
+      formControlName="selectedInvoice"
+      placeholder="Search by User or Product"
+      (onChange)="searchInvoice()"
+      [filter]="true"
+      filterBy="displayName"
+    >
+    </p-dropdown>
+  </div>
+</p-card>
 
-<div class="field" style="display: flex; flex-direction: column; gap: 10px">
-  <label for="invoiceId">Invoice ID: </label>
-  <input
-    type="text"
-    pInputText
-    [(ngModel)]="invoiceId"
-    (ngModelChange)="onInputChange()"
-    placeholder="Enter Invoice ID"
-  />
-</div>
-<div style="margin-top: 10px">
-  <p-button
-    label="Search"
-    (onClick)="searchInvoice()"
-    [disabled]="!invoiceId"
-  ></p-button>
-</div>
-
-<div style="margin-top: 40px" *ngIf="invoice$ | async">
-  <p-card header="Invoice Details">
-    <div>
-      <p><strong>Invoice ID:</strong> {{ (invoice$ | async)?.id }}</p>
-      <p><strong>Total:</strong> {{ (invoice$ | async)?.total | currency }}</p>
-      <p><strong>Status:</strong> {{ (invoice$ | async)?.status }}</p>
-      <p>
-        <strong>Date:</strong>
-        {{ (invoice$ | async)?.createdAt | date : "short" }}
-      </p>
-      <h3>Products</h3>
-      <p-table [value]="(invoice$ | async)?.products ?? []">
-        <ng-template pTemplate="header">
-          <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Subtotal</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-product>
-          <tr>
-            <td>{{ product.product.name }}</td>
-            <td>{{ product.quantity }}</td>
-            <td>{{ product.product.price | currency }}</td>
-            <td>{{ product.product.price * product.quantity | currency }}</td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
-  </p-card>
-</div>
-
-<p *ngIf="loading">Finding invoice details</p>
+<p-card header="Invoice Details" *ngIf="(invoice$ | async) && !loading">
+  <div>
+    <p><strong>Invoice ID:</strong> {{ (invoice$ | async)?.id }}</p>
+    <p><strong>Total:</strong> {{ (invoice$ | async)?.total | currency }}</p>
+    <p><strong>Status:</strong> {{ (invoice$ | async)?.status }}</p>
+    <p>
+      <strong>Date:</strong>
+      {{ (invoice$ | async)?.createdAt | date : "short" }}
+    </p>
+    <h3>Products</h3>
+    <p-table [value]="(invoice$ | async)?.products ?? []">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Subtotal</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>{{ product.product.name }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.product.price | currency }}</td>
+          <td>{{ product.product.price * product.quantity | currency }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</p-card>

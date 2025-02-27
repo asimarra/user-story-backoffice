@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
 
 import { InvoiceLookupComponent } from './invoice-lookup/invoice-lookup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -30,6 +31,7 @@ const routes = [
     TableModule,
     CardModule,
     InputTextModule,
+    DropdownModule,
   ],
 })
 export class InvoiceAdminModule {}
