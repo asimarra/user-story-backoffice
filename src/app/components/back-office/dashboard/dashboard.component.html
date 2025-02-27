@@ -1,1 +1,46 @@
-<p>User Story Dashboard</p>
+<div class="wrapper">
+  <p-card
+    [style]="{ width: '800px', margin: 'auto' }"
+    header="User Story Dashboard"
+    class="dashboard-container"
+  >
+    <div class="dashboard">
+      <h2 class="dashboard-title">Welcome, {{ userName }}!</h2>
+      <p class="dashboard-subtitle">
+        You are logged in as: <strong>{{ userRole }}</strong>
+      </p>
+
+      <div class="dashboard-stats">
+        <p-card
+          *ngIf="userRole === 'ADMIN'"
+          header="System Overview"
+          class="admin-card"
+        >
+          <div class="stat">
+            <p>Total Users</p>
+            <strong>{{ totalUsers$ | async }}</strong>
+          </div>
+          <div class="stat">
+            <p>Total Products</p>
+            <strong>{{ totalProducts$ | async }}</strong>
+          </div>
+        </p-card>
+
+        <p-card
+          *ngIf="userRole === 'USER'"
+          header="Your Activity"
+          class="user-card"
+        >
+          <div class="stat">
+            <p>Your Purchases</p>
+            <strong>{{ userPurchases$ | async }}</strong>
+          </div>
+          <div class="stat">
+            <p>Total Spent</p>
+            <strong>{{ totalSpent$ | async | currency }}</strong>
+          </div>
+        </p-card>
+      </div>
+    </div>
+  </p-card>
+</div>
