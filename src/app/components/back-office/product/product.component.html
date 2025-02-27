@@ -1,5 +1,12 @@
 <div>
-  <h1>Product List</h1>
+  <h1>Product List ({{ (products$ | async)?.length }})</h1>
+  <div style="margin-bottom: 20px; text-align: right">
+    <p-button
+      label="Create Product"
+      class="small"
+      (onClick)="goToCreateProduct()"
+    ></p-button>
+  </div>
 
   <div style="width: 100%">
     <p-table

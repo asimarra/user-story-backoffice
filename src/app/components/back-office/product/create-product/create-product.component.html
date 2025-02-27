@@ -1,0 +1,107 @@
+<h1>Create Product</h1>
+
+<div>
+  <form [formGroup]="productForm" (ngSubmit)="submitProduct()">
+    <p-card header="Create Product" [style]="{ width: '400px' }">
+      <div class="field">
+        <label for="name">Product Name</label>
+        <input
+          type="text"
+          pInputText
+          formControlName="name"
+          placeholder="Enter product name"
+        />
+        <small
+          *ngIf="name.invalid && (name.dirty || name.touched)"
+          class="p-error"
+        >
+          <div *ngIf="name.errors?.['required']">Name should not be empty.</div>
+          <div *ngIf="name.errors?.['pattern']">Name must be a string.</div>
+        </small>
+      </div>
+      <div class="field">
+        <label for="description">Description</label>
+        <input
+          type="text"
+          pInputText
+          formControlName="description"
+          placeholder="Enter description"
+        />
+        <small
+          *ngIf="
+            description.invalid && (description.dirty || description.touched)
+          "
+          class="p-error"
+        >
+          <div *ngIf="name.errors?.['required']">
+            Description should not be empty.
+          </div>
+          <div *ngIf="description.errors?.['pattern']">
+            Description must be a string.
+          </div>
+        </small>
+      </div>
+      <div class="field">
+        <label for="price">Price</label>
+        <p-inputNumber
+          formControlName="price"
+          [min]="1"
+          placeholder="Enter price"
+        ></p-inputNumber>
+        <small
+          *ngIf="price.invalid && (price.dirty || price.touched)"
+          class="p-error"
+        >
+          <div *ngIf="price.errors?.['required']">
+            Price must be greater than 0.
+          </div>
+          <div *ngIf="price.errors?.['min']">
+            Price must be a number conforming to the specified constraints.
+          </div>
+        </small>
+      </div>
+      <div class="field">
+        <label for="stock">Stock</label>
+        <p-inputNumber
+          formControlName="stock"
+          [min]="1"
+          placeholder="Enter stock"
+        ></p-inputNumber>
+        <small
+          *ngIf="stock.invalid && (stock.dirty || stock.touched)"
+          class="p-error"
+        >
+          <div *ngIf="stock.errors?.['required']">
+            Stock must be greater than 0.
+          </div>
+          <div *ngIf="stock.errors?.['min']">
+            Stock must be a number conforming to the specified constraints.
+          </div>
+        </small>
+      </div>
+      <div class="field">
+        <label for="status">Status</label>
+        <p-dropdown
+          [options]="statusOptions"
+          formControlName="status"
+          placeholder="Select status"
+        ></p-dropdown>
+        <small
+          *ngIf="status.invalid && (status.dirty || status.touched)"
+          class="p-error"
+        >
+          <div *ngIf="status.errors?.['required']">
+            Status must be one of the following values: ACTIVE, OUT_OF_STOCK,
+            DISCONTINUED, DELETED.
+          </div>
+        </small>
+      </div>
+      <p-button
+        label="Create Product"
+        styleClass="w-full"
+        [disabled]="productForm.invalid"
+        type="submit"
+      ></p-button>
+    </p-card>
+  </form>
+</div>

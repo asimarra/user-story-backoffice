@@ -42,4 +42,8 @@ export class ProductComponent implements OnInit {
         return 'info';
     }
   }
+
+  goToCreateProduct() {
+    this.router.navigate(['products/create']);
+  }
 }
