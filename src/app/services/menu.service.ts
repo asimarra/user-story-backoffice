@@ -34,7 +34,7 @@ const PermissionByRole: PermissionEntity[] = [
     role: Roles.ADMIN,
     resource: 'Products',
     route: '/products',
-    actions: [Action.CREATE, Action.UPDATE, Action.READ_ADMIN],
+    actions: [Action.CREATE, Action.UPDATE, Action.READ],
   },
   {
     role: Roles.ADMIN,
